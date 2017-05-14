@@ -9,12 +9,12 @@ class News < ActiveRecord::Base
   # Scopes
   scope :initial_date, -> (initial_date) { where("created_at >= ?", Time.at(initial_date.to_i/1000)) }
   scope :final_date, -> (final_date) { where("created_at <= ?", Time.at(final_date.to_i/1000)) }
-  scope :category, -> (category) { where("created_at LIKE ?", category) }
+  scope :category, -> (category) { where("category LIKE ?", category) }
 
   after_save :check_group
 
   def check_group
-    previous_news = News.where("category = ? and created_at <= ?", self.category, self.created_at + 5.hours)
+    previous_news = News.where("category = ? and created_at <= ?", self.category, self.created_at + 5.hours).where("earth_box(ll_to_earth(#{ self.latitude }, #{ self.longitude }), 50/1.609) @> ll_to_earth(latitude, longitude)")
     previous_news.each do |base_news|
       count = 0
       self.tags.each do |tag|

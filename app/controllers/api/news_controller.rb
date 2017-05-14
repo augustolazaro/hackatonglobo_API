@@ -9,7 +9,26 @@ class Api::NewsController < Api::BaseController
 
   def index
     news = News.where(denied: false).filter(params.slice(:initial_date, :final_date, :category)).order(created_at: :desc)
-    render json: { status: 0, data: news }
+    response_json = []
+    news.each do |new|
+      response_json << {
+        id: new.id,
+        content: new.content,
+        title: new.title,
+        image: new.image,
+        latitude: new.latitude,
+        longitude: new.longitude,
+        category: new.category,
+        rating: new.rating,
+        denied: new.denied,
+        user_id: new.user_id,
+        created_at: new.created_at,
+        group_id: new.group_id,
+        tags: new.tags.present? ? new.tags.map{ |tag| eval(tag)['name'] } : nil
+      }
+    end
+
+    render json: { status: 0, data: response_json }
   end
 
   def create
