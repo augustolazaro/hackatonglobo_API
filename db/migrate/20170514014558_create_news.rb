@@ -7,7 +7,7 @@ class CreateNews < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
       t.string :category
-      t.text :tags
+      t.text :tags, array: true
       t.integer :rating
       t.boolean :denied
       t.belongs_to :user

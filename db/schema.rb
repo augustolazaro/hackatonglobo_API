@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514014558) do
+ActiveRecord::Schema.define(version: 20170514105648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "news", force: :cascade do |t|
     t.string   "content"
@@ -23,12 +29,13 @@ ActiveRecord::Schema.define(version: 20170514014558) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "category"
-    t.text     "tags"
+    t.text     "tags",       array: true
     t.integer  "rating"
     t.boolean  "denied"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
 
   create_table "users", force: :cascade do |t|
