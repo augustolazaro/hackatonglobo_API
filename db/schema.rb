@@ -17,16 +17,18 @@ ActiveRecord::Schema.define(version: 20170514014558) do
   enable_extension "plpgsql"
 
   create_table "news", force: :cascade do |t|
-    t.string  "content"
-    t.string  "title"
-    t.string  "image"
-    t.float   "latitude"
-    t.float   "longitude"
-    t.string  "category"
-    t.text    "tags"
-    t.integer "rating"
-    t.boolean "denied"
-    t.integer "user_id"
+    t.string   "content"
+    t.string   "title"
+    t.string   "image"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "category"
+    t.text     "tags"
+    t.integer  "rating"
+    t.boolean  "denied"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|

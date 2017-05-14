@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :api, { format: 'json' } do
-    resource :news
+    get '/news' => 'news#index'
   end
 
 end

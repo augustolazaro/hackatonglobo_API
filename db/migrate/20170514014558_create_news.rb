@@ -11,6 +11,8 @@ class CreateNews < ActiveRecord::Migration
       t.integer :rating
       t.boolean :denied
       t.belongs_to :user
+
+      t.timestamps
     end
   end
 end

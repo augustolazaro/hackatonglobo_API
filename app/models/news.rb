@@ -1,10 +1,12 @@
 class News < ActiveRecord::Base
+  include Filterable
 
   belongs_to :user
 
-  serialize :classes, Array
-
-  enum type: { photo: 0, video: 1 }
+  # Scopes
+  scope :initial_date, -> (initial_date) { where("created_at >= ?", initial_date) }
+  scope :final_date, -> (final_date) { where("created_at <= ?", final_date) }
+  scope :category, -> (category) { where("created_at LIKE ?", category) }
 
   def set_analyses
     file = File.read("#{ Root.path.join('tmp', 'response.json') }")
