@@ -10,6 +10,7 @@ class CreateNews < ActiveRecord::Migration
       t.text :tags
       t.integer :rating
       t.boolean :denied
+      t.belongs_to :user
     end
   end
 end

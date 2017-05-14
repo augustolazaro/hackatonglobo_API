@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170514014558) do
     t.text    "tags"
     t.integer "rating"
     t.boolean "denied"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
